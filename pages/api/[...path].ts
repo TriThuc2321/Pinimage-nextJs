@@ -24,7 +24,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<any>) 
         }
 
         req.headers.cookie = '';
-
         proxy.web(req, res, {
             target: process.env.API_URL,
             changeOrigin: true,

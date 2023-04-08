@@ -19,4 +19,9 @@ interface IStore {
     user: IUser;
 }
 
-export type { LayoutProps, NextPageWithLayout, AppPropsWithLayout, IStore };
+interface INodeApi {
+    data: any;
+    status: string;
+}
+
+export type { LayoutProps, NextPageWithLayout, AppPropsWithLayout, IStore, INodeApi };

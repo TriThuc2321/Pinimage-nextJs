@@ -1,4 +1,4 @@
-import { IPost, IUser } from '@/interfaces';
+import { IPost, IUser } from '~/interfaces';
 
 export const user: IUser = {
     _id: '1',

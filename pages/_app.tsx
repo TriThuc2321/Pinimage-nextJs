@@ -1,10 +1,10 @@
-import axiosClient from '@/services/axios-client';
-import { AppPropsWithLayout } from '@/interfaces';
-import { EmptyLayout } from '@/layouts/empty';
+import axiosClient from '~/services/axios-client';
+import { AppPropsWithLayout } from '~/interfaces';
+import { EmptyLayout } from '~/layouts/empty';
 import { SWRConfig } from 'swr';
-import { StoreProvider } from '@/store/storeProvider';
-import '@/configs/firebase';
-import '@/styles/globals.css';
+import { StoreProvider } from '~/store/storeProvider';
+import '~/configs/firebase';
+import '~/styles/globals.css';
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
     const Layout = Component.Layout ?? EmptyLayout;

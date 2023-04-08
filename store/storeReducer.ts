@@ -1,4 +1,4 @@
-import { IStore, IUser } from '@/interfaces';
+import { IStore, IUser } from '~/interfaces';
 
 enum EStoreAction {
     SET_USER = 'SET_USER',

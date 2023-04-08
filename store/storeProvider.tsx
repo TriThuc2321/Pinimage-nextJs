@@ -2,10 +2,11 @@ import { ReactNode, useReducer, useEffect, useState } from 'react';
 import { getAuth } from 'firebase/auth';
 
 import { StoreContext } from './storeContext';
-import { IStore, IUser } from '@/interfaces';
-import { Loader } from '@/components';
+import { INodeApi, IStore, IUser } from '~/interfaces';
+import { Loader } from '~/components';
 import { storeReducer, EStoreAction } from './storeReducer';
-import { getUserByEmail } from '@/services/apis';
+import { authApi, userApi } from '~/services/apis';
+import { StorageKeys } from '~/constants';
 
 interface ProviderProps {
     children: ReactNode;
@@ -35,18 +36,18 @@ export const StoreProvider = ({ children }: ProviderProps) => {
 
     useEffect(() => {
         // auth.signOut();
+
         const authHandle = auth.onIdTokenChanged(async (user: any) => {
             if (user?.uid) {
-                if (user.accessToken !== localStorage.getItem('accessToken')) {
-                    localStorage.setItem('accessToken', user.accessToken);
-                    window.location.reload();
-                }
-                const { email } = user;
-                const getUser = await getUserByEmail(email);
-                setUser(getUser.data);
+                const { email, uid, accessToken } = user;
+
+                await authApi.login(accessToken);
+                const getUser = await userApi.getUserByEmail(email);
+
+                const { _id, name, picture } = getUser.data;
+                setUser({ _id, email, name, picture, uid });
             } else {
                 setUser(INIT_USER);
-                localStorage.clear();
             }
             setLoading(false);
         });
