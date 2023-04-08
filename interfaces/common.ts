@@ -1,15 +1,22 @@
 import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
+import { IUser } from './user';
 
-export interface LayoutProps {
+interface LayoutProps {
     children: ReactNode;
 }
 
-export type NextPageWithLayout = NextPage & {
+type NextPageWithLayout = NextPage & {
     Layout?: (props: LayoutProps) => ReactElement;
 };
 
-export type AppPropsWithLayout = AppProps & {
+type AppPropsWithLayout = AppProps & {
     Component: NextPageWithLayout;
 };
+
+interface IStore {
+    user: IUser;
+}
+
+export type { LayoutProps, NextPageWithLayout, AppPropsWithLayout, IStore };
