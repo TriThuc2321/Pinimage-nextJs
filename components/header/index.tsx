@@ -1,24 +1,17 @@
-import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
-import { getAuth } from 'firebase/auth';
 import { usePathname } from 'next/navigation';
-import { ArrowRightOnRectangleIcon, Bars3Icon, PlusIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import { Button } from '~/components/custom';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useStore } from '~/hooks';
 import Link from 'next/link';
-import { authApi } from '~/services/apis/auth';
+import { Logged, NotLogged } from './components';
 
 export default function Header() {
-    const router = useRouter();
     const { getUser } = useStore();
     const user = getUser();
-    const auth = getAuth();
 
     const pathname = usePathname();
     const [showMenu, setShowMenu] = useState(false);
-    const searchParams = useSearchParams();
 
     const [scrollPosition, setScrollPosition] = useState(0);
     const handleScroll = () => {
@@ -54,15 +47,6 @@ export default function Header() {
         },
     ];
 
-    const createQueryString = useCallback(
-        (name: string, value: string) => {
-            const params = new URLSearchParams(searchParams);
-            params.set(name, value);
-
-            return params.toString();
-        },
-        [searchParams],
-    );
     return (
         <div
             className={clsx([
@@ -80,36 +64,20 @@ export default function Header() {
                 </p>
             </div>
 
-            <div className="hidden tablet:flex tracking-widest text-white">
-                {menus.map((item) => (
-                    <Link href={item.pathname} key={item.id}>
-                        <p className={clsx({ ['text-primary font-bold']: pathname === item.pathname }, 'mx-4')}>
-                            {item.title}
-                        </p>
-                    </Link>
-                ))}
+            <div className="absolute left-0 right-0 flex justify-center -z-10">
+                <div className="hidden tablet:flex tracking-widest text-white">
+                    {menus.map((item) => (
+                        <Link href={item.pathname} key={item.id}>
+                            <p className={clsx({ ['text-primary font-bold']: pathname === item.pathname }, 'mx-4')}>
+                                {item.title}
+                            </p>
+                        </Link>
+                    ))}
+                </div>
             </div>
 
-            {user._id ? (
-                <div className="hidden tablet:flex items-center">
-                    <Button
-                        className="mx-2"
-                        text="New post"
-                        onClick={() => router.push(pathname + '?' + createQueryString('popup', 'new-post'))}
-                    />
-                    <Button
-                        className="mx-2"
-                        outline
-                        text="Logout"
-                        onClick={() => {
-                            auth.signOut();
-                            authApi.logout();
-                        }}
-                    />
-                </div>
-            ) : (
-                <Button className="mx-2" text="Login" onClick={() => router.push('/login')} />
-            )}
+            {user._id ? <Logged /> : <NotLogged />}
+
             <div className="flex tablet:hidden">
                 <Bars3Icon width={32} height={32} onClick={() => setShowMenu(!showMenu)} />
                 {showMenu && (
