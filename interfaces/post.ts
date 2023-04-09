@@ -8,3 +8,5 @@ interface IPost {
     view?: number;
     heart?: number;
 }
+
+export type { IPost };

@@ -1,0 +1,54 @@
+.button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 4px 16px;
+    min-width: 100px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #dc6678;
+}
+
+.outline {
+    font-weight: 500;
+    background-color: transparent;
+    border: var(--primary-color) 1px solid;
+    color: var(--primary-color);
+}
+
+.outline:hover {
+    background-color: #dc6678;
+    color: white;
+}
+
+.loading {
+    cursor: wait;
+    background-color: #dc6678;
+    color: white;
+    pointer-events: none;
+}
+
+.loading:hover {
+    cursor: wait;
+    background-color: #dc6678;
+    color: white;
+    pointer-events: none;
+}
+
+.disable {
+    background-color: #dc6678;
+    pointer-events: none;
+    cursor: alias;
+}
+
+.disable:hover {
+    cursor: alias;
+    background-color: #dc6678;
+    pointer-events: none;
+    color: white;
+}

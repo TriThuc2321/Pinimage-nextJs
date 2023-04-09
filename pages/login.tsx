@@ -7,6 +7,8 @@ function Login() {
     const router = useRouter();
     const auth = getAuth();
 
+    if (auth.currentUser) router.push('/');
+
     const handleLoginWithGoogle = async () => {
         const provider = new GoogleAuthProvider();
 

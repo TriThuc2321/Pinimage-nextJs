@@ -1,7 +1,7 @@
-import { Discover, Category } from '~/components';
-import { MainLayout } from '~/layouts';
+import React from 'react';
+import { Category, Discover } from '~/components';
 
-export default function Home() {
+export default function Dashboard() {
     return (
         <div className="top-0 bottom-0 left-0 right-0">
             <Discover />
@@ -9,5 +9,3 @@ export default function Home() {
         </div>
     );
 }
-
-Home.Layout = MainLayout;
