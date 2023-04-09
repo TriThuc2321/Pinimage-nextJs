@@ -8,6 +8,7 @@ import { Button } from '~/components/custom';
 import { useState, useEffect, useCallback } from 'react';
 import { useStore } from '~/hooks';
 import Link from 'next/link';
+import { authApi } from '~/services/apis/auth';
 
 export default function Header() {
     const router = useRouter();
@@ -96,7 +97,15 @@ export default function Header() {
                         text="New post"
                         onClick={() => router.push(pathname + '?' + createQueryString('popup', 'new-post'))}
                     />
-                    <Button className="mx-2" outline text="Logout" onClick={() => auth.signOut()} />
+                    <Button
+                        className="mx-2"
+                        outline
+                        text="Logout"
+                        onClick={() => {
+                            auth.signOut();
+                            authApi.logout();
+                        }}
+                    />
                 </div>
             ) : (
                 <Button className="mx-2" text="Login" onClick={() => router.push('/login')} />

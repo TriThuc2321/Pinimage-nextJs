@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
 
-import { userApi } from '~/services/apis';
+import { authApi, userApi } from '~/services/apis';
 
 function Login() {
     const router = useRouter();
@@ -22,8 +22,9 @@ function Login() {
             email: email ? email : '',
             picture: photoURL,
         };
-
-        userApi.createUser(newUser);
+        const accessToken = await auth.currentUser?.getIdToken();
+        await authApi.login(accessToken);
+        await userApi.createUser(newUser);
 
         router.push('/');
     };

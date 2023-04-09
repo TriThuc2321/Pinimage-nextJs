@@ -55,5 +55,5 @@ export const StoreProvider = ({ children }: ProviderProps) => {
         return () => authHandle();
     }, [auth]);
 
-    return <StoreContext.Provider value={{ store, setUser }}>{loading ? <Loader /> : children}</StoreContext.Provider>;
+    return <StoreContext.Provider value={{ store, setUser }}> {children}</StoreContext.Provider>;
 };
