@@ -4,7 +4,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import './styles.module.css';
 
 interface ListImagesProps {
     posts: Array<IPost>;
@@ -14,6 +13,7 @@ export default function ListImages({ posts, className }: ListImagesProps) {
     return (
         <div className={className}>
             <Swiper
+                style={{ '--swiper-pagination-color': '#d64f64' }}
                 slidesPerView={2.6}
                 spaceBetween={5}
                 pagination={{

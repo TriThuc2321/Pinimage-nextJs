@@ -27,7 +27,7 @@ const Button: React.FC<Props> = ({ text = '', outline = false, status = 'ACTIVE'
             )}
         >
             <p>{text}</p>
-            {status == 'LOADING' && <DotSpinner className="ml-2 text-white" />}
+            {status == 'LOADING' && <DotSpinner className="ml-2 text-white w-6 h-6" />}
         </div>
     );
 };

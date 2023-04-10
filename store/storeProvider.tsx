@@ -7,6 +7,7 @@ import { Loader } from '~/components';
 import { storeReducer, EStoreAction } from './storeReducer';
 import { authApi, userApi } from '~/services/apis';
 import { StorageKeys } from '~/constants';
+import useAlert from '~/components/custom/alert';
 
 interface ProviderProps {
     children: ReactNode;
@@ -26,6 +27,7 @@ const INIT_STATE: IStore = {
 
 export const StoreProvider = ({ children }: ProviderProps) => {
     const auth = getAuth();
+    const {Alert, showAlert} = useAlert()
 
     const [store, dispatch] = useReducer(storeReducer, INIT_STATE);
     const [loading, setLoading] = useState(true);
@@ -55,5 +57,5 @@ export const StoreProvider = ({ children }: ProviderProps) => {
         return () => authHandle();
     }, [auth]);
 
-    return <StoreContext.Provider value={{ store, setUser }}> {children}</StoreContext.Provider>;
+    return <StoreContext.Provider value={{ store, setUser, showAlert }}>{<>{children} <Alert/></>}</StoreContext.Provider>;
 };

@@ -4,8 +4,10 @@ import { openAIApi } from '~/services/apis/openAI';
 import { Button } from '~/components/custom';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
+import { useStore } from '~/hooks';
 
 export default function NewPost() {
+    const { showAlert } = useStore();
     const router = useRouter();
     const pathname = usePathname();
     const [image, setImage] = useState<string>(
@@ -19,7 +21,6 @@ export default function NewPost() {
         setLoading(true);
         const { data } = await openAIApi.createImage(prompt);
         setImage(data);
-        setPrompt('');
         setLoading(false);
     };
 

@@ -23,11 +23,13 @@
 
 .outline:hover {
     background-color: #dc6678;
+    border: #dc6678 1px solid;
     color: white;
 }
 
 .loading {
     cursor: wait;
+    border: #dc6678 1px solid;
     background-color: #dc6678;
     color: white;
     pointer-events: none;

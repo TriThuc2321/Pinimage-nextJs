@@ -1,16 +1,16 @@
-import '~/styles/DotSpinner.module.css';
+import styles from '~/styles/DotSpinner.module.css';
 
 function DotSpinner({ className }: { className?: string }) {
     return (
-        <div className={`dot-spinner ${className}`}>
-            <div className="dot-spinner__dot"></div>
-            <div className="dot-spinner__dot"></div>
-            <div className="dot-spinner__dot"></div>
-            <div className="dot-spinner__dot"></div>
-            <div className="dot-spinner__dot"></div>
-            <div className="dot-spinner__dot"></div>
-            <div className="dot-spinner__dot"></div>
-            <div className="dot-spinner__dot"></div>
+        <div className={`${styles.dot_spinner} ${className}`}>
+            <div className={styles.dot_spinner__dot}></div>
+            <div className={styles.dot_spinner__dot}></div>
+            <div className={styles.dot_spinner__dot}></div>
+            <div className={styles.dot_spinner__dot}></div>
+            <div className={styles.dot_spinner__dot}></div>
+            <div className={styles.dot_spinner__dot}></div>
+            <div className={styles.dot_spinner__dot}></div>
+            <div className={styles.dot_spinner__dot}></div>
         </div>
     );
 }
