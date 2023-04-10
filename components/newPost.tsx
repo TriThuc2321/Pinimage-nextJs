@@ -5,6 +5,7 @@ import { Button } from '~/components/custom';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useStore } from '~/hooks';
+import { getRandomPrompt } from '~/utils';
 
 export default function NewPost() {
     const { showAlert } = useStore();
@@ -17,6 +18,10 @@ export default function NewPost() {
     const [prompt, setPrompt] = useState('');
     const [loading, setLoading] = useState(false);
 
+    const handleGetSample = () => {
+        const sample = getRandomPrompt(prompt);
+        setPrompt(sample);
+    };
     const handleGenerateImg = async () => {
         setLoading(true);
         const { data } = await openAIApi.createImage(prompt);
@@ -26,7 +31,7 @@ export default function NewPost() {
 
     return (
         <div className="flex items-center justify-center bg-blear text-gray-800 top-0 left-0 right-0 bottom-0 fixed z-50">
-            <div className="rounded-sm relative bg-white w-full h-full px-4 pt-4 desktop:w-1/3 desktop:h-5/6">
+            <div className="rounded-sm relative bg-white w-full h-full px-4 pt-4 desktop:w-1/3 desktop:h-5/6  overflow-y-scroll">
                 <div className="flex items-center cursor-pointer" onClick={() => window.location.reload()}>
                     <img
                         className="w-8 h-8"
@@ -48,10 +53,12 @@ export default function NewPost() {
                     you create.
                 </p>
 
-                <p className="mt-6">Prompt</p>
-                <input
+                <div className="flex items-center mt-6 mb-2">
+                    <p>Prompt</p>
+                    <Button className="h-8 ml-2" text="Get sample" onClick={handleGetSample} />
+                </div>
+                <textarea
                     className="mt-1 bg-white rounded-sm border px-2 py-1 w-full"
-                    type="text"
                     placeholder="Prompt..."
                     value={prompt}
                     onChange={(event) => setPrompt(event.target.value)}
@@ -66,7 +73,7 @@ export default function NewPost() {
                     text="Generate"
                     onClick={handleGenerateImg}
                 />
-                <Button className="mt-2" text="Share with Pinimage" />
+                <Button className="mt-2 mb-4" text="Share with Pinimage" />
             </div>
         </div>
     );
