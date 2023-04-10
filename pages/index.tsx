@@ -18,7 +18,7 @@ export default function Home() {
     }, [popup]);
 
     return (
-        <div className="top-0 bottom-0 left-0 right-0">
+        <div className="top-0 left-0 right-0">
             <Discover />
             <Category />
             {showNewPost && <NewPost />}

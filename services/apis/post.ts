@@ -7,4 +7,5 @@ interface IPostProp {
 }
 export const postApi = {
     createPost: (post: IPostProp) => axiosClient.post('/post', post),
+    getPosts: (params: string) => axiosClient.get(`/post/${params}`),
 };

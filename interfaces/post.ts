@@ -5,7 +5,7 @@ interface IPost {
     prompt: string;
     url: string;
     host?: IUser;
-    view?: number;
+    views?: number;
     heart?: number;
 }
 

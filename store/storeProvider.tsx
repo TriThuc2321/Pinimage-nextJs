@@ -27,7 +27,7 @@ const INIT_STATE: IStore = {
 
 export const StoreProvider = ({ children }: ProviderProps) => {
     const auth = getAuth();
-    const {Alert, showAlert} = useAlert()
+    const { Alert, showAlert } = useAlert();
 
     const [store, dispatch] = useReducer(storeReducer, INIT_STATE);
     const [loading, setLoading] = useState(true);
@@ -57,5 +57,16 @@ export const StoreProvider = ({ children }: ProviderProps) => {
         return () => authHandle();
     }, [auth]);
 
-    return <StoreContext.Provider value={{ store, setUser, showAlert }}>{<>{children} <Alert/></>}</StoreContext.Provider>;
+    return (
+        <StoreContext.Provider value={{ store, setUser, showAlert }}>
+            {loading ? (
+                <Loader />
+            ) : (
+                <>
+                    {children}
+                    <Alert />
+                </>
+            )}
+        </StoreContext.Provider>
+    );
 };

@@ -17,12 +17,12 @@ export default function PostCard({ post }: IPostCardProps) {
                 <div className="flex text-white">
                     <div className="flex items-center mr-4">
                         <HeartIcon className="w-4 h-4 mr-1" />
-                        <p>{post.heart}</p>
+                        <p>{post.heart || '0'}</p>
                     </div>
 
                     <div className="flex items-center">
                         <EyeIcon className="w-4 h-4 mr-1" />
-                        <p>{post.view}</p>
+                        <p>{post.views || '0'}</p>
                     </div>
                 </div>
             </div>
