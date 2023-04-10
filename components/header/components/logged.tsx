@@ -5,6 +5,7 @@ import React, { useCallback } from 'react';
 import { Button } from '~/components/custom';
 import { useStore } from '~/hooks';
 import { authApi } from '~/services/apis';
+import { createQueryStringFactory } from '~/utils';
 
 export default function Logged() {
     const router = useRouter();
@@ -15,16 +16,8 @@ export default function Logged() {
     const { getUser } = useStore();
 
     const { name, picture } = getUser();
+    const createQueryString = createQueryStringFactory(searchParams);
 
-    const createQueryString = useCallback(
-        (name: string, value: string) => {
-            const params = new URLSearchParams(searchParams);
-            params.set(name, value);
-
-            return params.toString();
-        },
-        [searchParams],
-    );
     return (
         <div className="hidden tablet:flex items-center">
             {/* <p className="font-bold mr-4">{name}</p> */}

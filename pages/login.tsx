@@ -26,7 +26,7 @@ function Login() {
         await authApi.login(accessToken);
         await userApi.createUser(newUser);
 
-        router.push('/');
+        router.replace('/');
     };
 
     return (
