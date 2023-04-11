@@ -34,7 +34,7 @@ export default function Category() {
                 const { data, pagination } = (await postApi.getPosts(
                     `?limit=12&page=${page}`,
                 )) as unknown as IDataCategory;
-                setCategories([...data, ...categories]);
+                setCategories([...categories, ...data]);
                 setPagination(pagination);
             };
 
