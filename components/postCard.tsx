@@ -23,7 +23,7 @@ export default function PostCard({ post, handleLove }: IPostCardProps) {
     };
 
     const handleShowPrompt = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-        if (!isHTMLElement(e.target) || e.target.tagName === 'path') return;
+        if (!isHTMLElement(e.target) || e.target.tagName === 'path' || e.target.tagName === 'P') return;
         setShowPrompt(!showPrompt);
     };
 
@@ -54,12 +54,13 @@ export default function PostCard({ post, handleLove }: IPostCardProps) {
                             onClick={() => handleLove(isLoved, post._id, _id)}
                         />
                         <p>{post.favorites?.length || '0'}</p>
+                        <p className="ml-2">Loves</p>
                     </div>
 
-                    <div className="flex items-center">
+                    {/* <div className="flex items-center">
                         <EyeIcon className="w-4 h-4 mr-1 cursor-pointer" />
                         <p>{post.views || '0'}</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
