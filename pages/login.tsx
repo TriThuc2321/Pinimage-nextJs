@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
+import Image from 'next/image';
 
+import grey from '~/assets/grey.png';
 import { authApi, userApi } from '~/services/apis';
 
 function Login() {
@@ -42,7 +44,12 @@ function Login() {
                     className="flex rounded-xl bg-white items-center mt-6 cursor-pointer p-2 justify-center"
                     onClick={handleLoginWithGoogle}
                 >
-                    <img className="h-6 w-6 " src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="" />
+                    <Image
+                        className="h-6 w-6 "
+                        src={grey}
+                        loader={() => 'https://cdn-icons-png.flaticon.com/512/2991/2991148.png'}
+                        alt=""
+                    />
                     <p className="ml-4 text-primary font-bold">Login with google</p>
                 </div>
             </div>

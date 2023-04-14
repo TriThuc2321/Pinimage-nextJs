@@ -1,12 +1,18 @@
-import { Category, ListImages } from '~/components';
+import { ListImages } from '~/components';
+import Image from 'next/image';
 import { posts } from '~/services/mock';
+import grey from '~/assets/grey.png';
 
 export default function Discover() {
     return (
         <>
-            <img
+            <Image
                 className="h-screen w-screen absolute -z-10"
-                src="https://res.cloudinary.com/dpz16u0pa/image/upload/v1678937548/c1fb18f9a6ae217916932d522029a2a5_1_jjoyyx.jpg"
+                loader={() =>
+                    'https://res.cloudinary.com/dpz16u0pa/image/upload/v1678937548/c1fb18f9a6ae217916932d522029a2a5_1_jjoyyx.jpg'
+                }
+                src={grey}
+                alt="Discover"
             />
             <div className="flex justify-center items-center w-screen h-screen flex-col desktop:justify-start desktop:flex-row">
                 <div className=" desktop:ml-24 max-w-xl text-white desktop:bg-blear rounded-xl shadow-lg px-12 py-8">
