@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import { HeartIcon, EyeIcon } from '@heroicons/react/24/solid';
 import { IPost } from '~/interfaces';
+import grey from '~/assets/grey.png';
 
 interface IPostCardProps {
     post: IPost;
@@ -7,10 +9,15 @@ interface IPostCardProps {
 export default function PostCard({ post }: IPostCardProps) {
     return (
         <div className="">
-            <img className="rounded-xl" src={post.url} alt={post.prompt} />
+            <Image className="rounded-xl w-max" loader={() => post.url} src={grey} alt={post.prompt} />
             <div className="flex items-center justify-between h-10">
                 <div className="flex items-center">
-                    <img className="h-6 w-6 rounded-full mr-2" src={post.host?.picture || ''} alt="host" />
+                    <Image
+                        className="h-6 w-6 rounded-full mr-2"
+                        loader={() => post.host?.picture || ''}
+                        alt="host"
+                        src={grey}
+                    />
                     <p className="font-bold text-white ">{post.host?.name}</p>
                 </div>
 

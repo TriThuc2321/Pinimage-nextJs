@@ -46,7 +46,7 @@ export default function Category() {
         <div className="flex flex-col right-0 left-0 m-0 top-96">
             <p className="font-bold text-2xl ml-4 mt-4">Pinimage</p>
 
-            <div className="p-6 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 gap-4 w-full">
+            <div className="p-6 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 gap-8 w-full">
                 {categories && categories.map((item) => <PostCard key={item._id} post={item} />)}
             </div>
         </div>

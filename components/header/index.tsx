@@ -4,7 +4,9 @@ import clsx from 'clsx';
 import { useState, useEffect } from 'react';
 import { useStore } from '~/hooks';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Logged, NotLogged } from './components';
+import grey from '~/assets/grey.png';
 
 export default function Header() {
     const { getUser } = useStore();
@@ -55,9 +57,11 @@ export default function Header() {
             ])}
         >
             <div className="flex items-center cursor-pointer" onClick={() => window.location.reload()}>
-                <img
+                <Image
                     className="w-12 h-12"
-                    src="https://res.cloudinary.com/dpz16u0pa/image/upload/v1678937447/Untitled-2_ecjiqz.png"
+                    src={grey}
+                    loader={() => 'https://res.cloudinary.com/dpz16u0pa/image/upload/v1678937447/Untitled-2_ecjiqz.png'}
+                    alt="Logo"
                 />
                 <p className="font-bold text-xl">
                     <span className="text-white">PIN</span>IMAGE

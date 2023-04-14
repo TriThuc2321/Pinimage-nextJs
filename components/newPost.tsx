@@ -1,5 +1,7 @@
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import React, { useState } from 'react';
+import Image from 'next/image';
+import grey from '~/assets/grey.png';
 import { openAIApi } from '~/services/apis/openAI';
 import { Button } from '~/components/custom';
 import { usePathname } from 'next/navigation';
@@ -82,9 +84,13 @@ export default function NewPost() {
             <div className="rounded-lg relative bg-white w-full h-full px-4 pt-4 desktop:w-1/3 desktop:h-5/6  overflow-y-scroll">
                 <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
                     <div className="flex items-center cursor-pointer" onClick={() => window.location.reload()}>
-                        <img
+                        <Image
                             className="w-8 h-8"
-                            src="https://res.cloudinary.com/dpz16u0pa/image/upload/v1678937447/Untitled-2_ecjiqz.png"
+                            loader={() =>
+                                'https://res.cloudinary.com/dpz16u0pa/image/upload/v1678937447/Untitled-2_ecjiqz.png'
+                            }
+                            src={grey}
+                            alt="Default image"
                         />
                         <p className="font-bold text-xl">
                             <span className="text-primary">PIN</span>IMAGE
@@ -113,7 +119,7 @@ export default function NewPost() {
                     onChange={(event) => setPrompt(event.target.value)}
                     disabled={loading}
                 />
-                <img className="mt-2 w-60" src={image} />
+                <Image className="mt-2 w-60" alt="Image" src={grey} loader={() => image} />
 
                 <div className="absolute bottom-0 left-4 right-4">
                     <Button
