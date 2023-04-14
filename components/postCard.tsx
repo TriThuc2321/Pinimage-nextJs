@@ -1,9 +1,9 @@
+import { MouseEvent } from 'react';
 import Image from 'next/image';
 import { HeartIcon, EyeIcon } from '@heroicons/react/24/solid';
-import { INodeApi, IPost } from '~/interfaces';
+import { IPost } from '~/interfaces';
 import grey from '~/assets/grey.png';
-import { useEffect, useState } from 'react';
-import { postApi } from '~/services/apis/post';
+import { useState } from 'react';
 import { useStore } from '~/hooks';
 
 interface IPostCardProps {
@@ -16,17 +16,25 @@ export default function PostCard({ post, handleLove }: IPostCardProps) {
 
     const isLoved = !!post.favorites?.find((e) => e.userId === _id);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const { _id } = getUser();
-    //         const a = await postApi.loved(post._id, _id);
-    //         console.log(a);
-    //     };
-    //     fetchData();
-    // }, []);
+    const [showPrompt, setShowPrompt] = useState(false);
+
+    const isHTMLElement = (target: any): target is HTMLElement => {
+        return target instanceof HTMLElement;
+    };
+
+    const handleShowPrompt = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
+        if (!isHTMLElement(e.target) || e.target.tagName === 'path') return;
+        setShowPrompt(!showPrompt);
+    };
 
     return (
-        <div className="">
+        <div className="relative" onClick={handleShowPrompt}>
+            {showPrompt && (
+                <div className="absolute break-words w-full h-full flex items-center justify-center p-6 text-center font-bold bg-blear08">
+                    <p>{post.prompt}</p>
+                </div>
+            )}
+
             <Image className="rounded-xl w-max" loader={() => post.url} src={grey} alt={post.prompt} />
             <div className="flex items-center justify-between h-10">
                 <div className="flex items-center">

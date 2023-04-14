@@ -14,7 +14,6 @@ export const posts: Array<IPost> = [
         url: 'https://i.pinimg.com/564x/ea/14/9e/ea149e5c092e75eb27a1598dbf515fb1.jpg',
         host: user,
         views: 100,
-        heart: 23,
     },
     {
         _id: '2',
@@ -22,7 +21,6 @@ export const posts: Array<IPost> = [
         url: 'https://i.pinimg.com/564x/79/66/c2/7966c262dbe1db6a1280f3baa7bd953e.jpg',
         host: user,
         views: 100,
-        heart: 23,
     },
     {
         _id: '3',
@@ -30,7 +28,6 @@ export const posts: Array<IPost> = [
         url: 'https://i.pinimg.com/564x/f1/de/60/f1de60e9be62911e7b08230b825233dc.jpg',
         host: user,
         views: 100,
-        heart: 23,
     },
     {
         _id: '4',
@@ -38,7 +35,6 @@ export const posts: Array<IPost> = [
         url: 'https://i.pinimg.com/564x/5d/06/a8/5d06a807584f2d8342df807b01e02d49.jpg',
         host: user,
         views: 100,
-        heart: 23,
     },
     {
         _id: '5',
@@ -46,7 +42,6 @@ export const posts: Array<IPost> = [
         url: 'https://i.pinimg.com/564x/e4/d6/f3/e4d6f34aafbe624d37ad7f9e1500a467.jpg',
         host: user,
         views: 100,
-        heart: 23,
     },
     {
         _id: '6',
@@ -54,7 +49,6 @@ export const posts: Array<IPost> = [
         url: 'https://i.pinimg.com/564x/60/2a/eb/602aebc1661e73382169d68f1b27c719.jpg',
         host: user,
         views: 100,
-        heart: 23,
     },
     {
         _id: '7',
@@ -62,7 +56,6 @@ export const posts: Array<IPost> = [
         url: 'https://i.pinimg.com/564x/ea/14/9e/ea149e5c092e75eb27a1598dbf515fb1.jpg',
         host: user,
         views: 100,
-        heart: 23,
     },
     {
         _id: '8',
@@ -70,7 +63,6 @@ export const posts: Array<IPost> = [
         url: 'https://i.pinimg.com/564x/79/66/c2/7966c262dbe1db6a1280f3baa7bd953e.jpg',
         host: user,
         views: 100,
-        heart: 23,
     },
 ];
 

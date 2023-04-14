@@ -25,6 +25,19 @@
     background-color: #8f555e;
 }
 
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(0, 0%, 30%);
+    }
+    100% {
+        background-color: hsl(0, 0%, 68%);
+    }
+}
+
 * {
     box-sizing: border-box;
     padding: 0;
