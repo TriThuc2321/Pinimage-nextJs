@@ -6,6 +6,8 @@ interface IPostProp {
     image: string;
 }
 export const postApi = {
-    createPost: (post: IPostProp) => axiosClient.post('/post', post),
     getPosts: (params: string) => axiosClient.get(`/post/${params}`),
+    createPost: (post: IPostProp) => axiosClient.post('/post', post),
+    loved: (postId: string, userId: string) => axiosClient.post('/post/loved', { postId, userId }),
+    unloved: (postId: string, userId: string) => axiosClient.post('/post/unloved', { postId, userId }),
 };
