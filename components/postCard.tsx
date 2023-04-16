@@ -35,7 +35,7 @@ export default function PostCard({ post, handleLove }: IPostCardProps) {
                 </div>
             )}
 
-            <Image className="rounded-xl w-max" loader={() => post.url} src={grey} alt={post.prompt} />
+            <Image className="rounded-xl w-full" loader={() => post.url} src={grey} alt={post.prompt} />
             <div className="flex items-center justify-between h-10">
                 <div className="flex items-center">
                     <Image

@@ -1,4 +1,4 @@
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { useState, useEffect } from 'react';
@@ -7,15 +7,22 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Logged, NotLogged } from './components';
 import grey from '~/assets/grey.png';
+import { getAuth } from 'firebase/auth';
+import { authApi } from '~/services/apis';
+import { createQueryStringFactory } from '~/utils';
 
 export default function Header() {
     const { getUser } = useStore();
+    const router = useRouter();
     const user = getUser();
+    const auth = getAuth();
+    const searchParams = useSearchParams();
 
     const pathname = usePathname();
     const [showMenu, setShowMenu] = useState(false);
-
     const [scrollPosition, setScrollPosition] = useState(0);
+    const createQueryString = createQueryStringFactory(searchParams);
+
     const handleScroll = () => {
         const position = window.pageYOffset;
         setScrollPosition(position);
@@ -82,30 +89,52 @@ export default function Header() {
 
             {user._id ? <Logged /> : <NotLogged />}
 
-            <div className="flex tablet:hidden">
-                <Bars3Icon width={32} height={32} onClick={() => setShowMenu(!showMenu)} />
-                {showMenu && (
-                    <div className="bg-blear08 z-50 fixed top-20 left-0 right-0 bottom-0 text-white px-4">
-                        {[...menus, { id: '3', title: 'New post', pathname: '/new-post' }].map((item) => (
-                            <Link href={item.pathname} key={item.id}>
-                                <p
-                                    className={clsx(
-                                        { ['text-primary font-bold']: pathname === item.pathname },
-                                        'my-5 mx-5 text-4xl justify-end text-center',
-                                    )}
-                                >
-                                    {item.title}
-                                </p>
-                            </Link>
-                        ))}
+            {user._id && (
+                <div className="flex tablet:hidden">
+                    <Bars3Icon width={32} height={32} onClick={() => setShowMenu(!showMenu)} />
+                    {showMenu && (
+                        <div className="bg-blear08 z-50 fixed top-20 left-0 right-0 bottom-0 text-white px-4">
+                            {menus.map((item) => (
+                                <Link href={item.pathname} key={item.id}>
+                                    <p
+                                        className={clsx(
+                                            { ['text-primary font-bold']: pathname === item.pathname },
+                                            'my-5 mx-5 text-4xl justify-end text-center',
+                                        )}
+                                    >
+                                        {item.title}
+                                    </p>
+                                </Link>
+                            ))}
 
-                        <div className=" w-full h-0.5 bg-primary" />
-                        <Link href="/login">
-                            <p className="my-5 mx-5 text-4xl justify-end text-center">Login</p>
-                        </Link>
-                    </div>
-                )}
-            </div>
+                            <p
+                                className={clsx(
+                                    // { ['text-primary font-bold']: pathname === item.pathname },
+                                    'my-5 mx-5 text-4xl justify-end text-center',
+                                )}
+                                onClick={() => {
+                                    router.push(pathname + '?' + createQueryString('popup', 'new-post'));
+                                    setShowMenu(false);
+                                }}
+                            >
+                                New post
+                            </p>
+
+                            <div className=" w-full h-0.5 bg-primary" />
+
+                            <p
+                                className="my-5 mx-5 text-4xl justify-end text-center"
+                                onClick={() => {
+                                    auth.signOut();
+                                    authApi.logout();
+                                }}
+                            >
+                                Logout
+                            </p>
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
 }
