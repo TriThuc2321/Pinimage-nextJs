@@ -1,5 +1,5 @@
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { PostCard } from '~/components';
 import { postApi } from '~/services/apis/post';
 import { INodeApi, IPost } from '~/interfaces';
@@ -27,19 +27,22 @@ export default function Category() {
     const [isReachBottom, setIsReachBottom] = useState(true);
     const [loading, setLoading] = useState(false);
 
-    const getPosts = async (page: number) => {
-        if (page <= 1) {
-            setLoading(true);
-        }
-        const { data, pagination } = (await postApi.getPosts(`?limit=12&page=${page}`)) as unknown as IDataCategory;
-        if (page === 1) {
-            setCategories(data);
-        } else {
-            setCategories([...categories, ...data]);
-        }
-        setPagination(pagination);
-        setLoading(false);
-    };
+    const getPosts = useCallback(
+        async (page: number) => {
+            if (page <= 1) {
+                setLoading(true);
+            }
+            const { data, pagination } = (await postApi.getPosts(`?limit=12&page=${page}`)) as unknown as IDataCategory;
+            if (page === 1) {
+                setCategories(data);
+            } else {
+                setCategories([...categories, ...data]);
+            }
+            setPagination(pagination);
+            setLoading(false);
+        },
+        [categories],
+    );
     useBottomScrollListener(() => setIsReachBottom(true), {
         offset: 10,
         debounce: 2000,
@@ -99,7 +102,7 @@ export default function Category() {
             getPosts(+pagination.page + 1);
             setIsReachBottom(false);
         }
-    }, [isReachBottom]);
+    }, [isReachBottom, getPosts, pagination]);
 
     return (
         <div className="flex flex-col right-0 left-0 m-0 top-96">
