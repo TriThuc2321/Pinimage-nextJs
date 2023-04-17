@@ -28,7 +28,9 @@ export default function Category() {
     const [loading, setLoading] = useState(false);
 
     const getPosts = async (page: number) => {
-        setLoading(true);
+        if (page <= 1) {
+            setLoading(true);
+        }
         const { data, pagination } = (await postApi.getPosts(`?limit=12&page=${page}`)) as unknown as IDataCategory;
         if (page === 1) {
             setCategories(data);
