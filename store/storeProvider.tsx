@@ -40,18 +40,22 @@ export const StoreProvider = ({ children }: ProviderProps) => {
         // auth.signOut();
 
         const authHandle = auth.onIdTokenChanged(async (user: any) => {
-            if (user?.uid) {
-                const { email, uid, accessToken } = user;
+            try {
+                if (user?.uid) {
+                    const { email, uid, accessToken } = user;
 
-                await authApi.login(accessToken);
-                const getUser = await userApi.getUserByEmail(email);
+                    await authApi.login(accessToken);
+                    const getUser = await userApi.getUserByEmail(email);
 
-                const { _id, name, picture } = getUser.data;
-                setUser({ _id, email, name, picture, uid });
-            } else {
-                setUser(INIT_USER);
+                    const { _id, name, picture } = getUser.data;
+                    setUser({ _id, email, name, picture, uid });
+                } else {
+                    setUser(INIT_USER);
+                }
+            } catch (e) {
+            } finally {
+                setLoading(false);
             }
-            setLoading(false);
         });
 
         return () => authHandle();
