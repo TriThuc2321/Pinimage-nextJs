@@ -5,7 +5,8 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start",
+        "start": "/home/site/wwwroot/node_modules/next/dist/bin/next",
+        "startLocal": "next start",
         "lint": "next lint",
         "tailwind": "pnpx tailwindcss -i ./input-tailwind.css -o ./output-tailwind.css --watch"
     },
@@ -38,6 +39,7 @@
         "@types/http-proxy": "^1.17.10",
         "autoprefixer": "^10.4.14",
         "postcss": "^8.4.21",
+        "prettier": "2.8.8",
         "tailwindcss": "^3.3.1"
     }
 }
